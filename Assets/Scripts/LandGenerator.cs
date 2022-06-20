@@ -36,7 +36,7 @@ public class LandGenerator : MonoBehaviour
                 if (Utils.RandomBoolean())
                 {
                     GameObject l = UnityEngine.Random.value > 0.9f && a > 1 - (float)fillPercent ?
-                        Instantiate(entities[UnityEngine.Random.Range(0, entities.Length)], new Vector3(x, h, y), Quaternion.Euler(-90, UnityEngine.Random.Range(0, 360), 0)) : null;
+                        Instantiate(entities[UnityEngine.Random.Range(0, entities.Length)], new Vector3(x, h * 10f, y), Quaternion.Euler(-90, UnityEngine.Random.Range(0, 360), 0)) : null;
                 }
 
             }

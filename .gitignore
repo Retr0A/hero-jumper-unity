@@ -58,3 +58,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Github Plugin
+/Assets/Plugins/
+/Assets/Plugins.meta
