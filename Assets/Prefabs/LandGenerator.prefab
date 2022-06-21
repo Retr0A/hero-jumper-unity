@@ -75,8 +75,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   tile: {fileID: 4472894613273591497, guid: ef0c9c63cc1e415489444dd8d2aab078, type: 3}
   entities:
-  - {fileID: 4472894613273591497, guid: ef0c9c63cc1e415489444dd8d2aab078, type: 3}
+  - {fileID: 8258003308008840339, guid: 6ffe07b37f8745a4e8650d0a70c13932, type: 3}
   noiseScale: 15
   fillPercent: 0.7
-  size: 50
+  size: 300
   landHeight: 10

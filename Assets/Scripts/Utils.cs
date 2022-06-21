@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Utils
 {
-    public static bool RandomBoolean()
+    /// <summary>
+    /// Selects random boolean true or false.
+    /// </summary>
+    /// <param name="rarity">The rarity of selecting true.</param>
+    /// <returns>The random boolean</returns>
+    public static bool RandomBoolean(float rarity)
     {
-        if (Random.value >= 0.5)
+        if (Random.value >= rarity)
         {
             return true;
         }

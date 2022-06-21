@@ -29,14 +29,16 @@ public class LandGenerator : MonoBehaviour
                 float a = Mathf.PerlinNoise((float)x / noiseScale, (float)y / noiseScale);
                 float h = a > 1 - (float)fillPercent ? 0 : -0.1f;
                 GameObject g = Instantiate(tile, new Vector3(x, h, y), Quaternion.identity);
+                g.GetComponent<Tile>().isGround = a > 1 - (float)fillPercent ? true : false;
+                g.GetComponent<Tile>().type = a > 1 - (float)fillPercent ? TileType.Ground : TileType.Water;
                 g.GetComponent<MeshRenderer>().material.color = a > 1 - (float)fillPercent ? color.Evaluate(a + 0.3f) : color.Evaluate(a);
                 g.transform.parent = transform;
                 g.transform.localScale = a > 1 - (float)fillPercent ? new Vector3(1, a * landHeight, 1) : new Vector3(1, UnityEngine.Random.Range(0.2f, 0.7f), 1);
 
-                if (Utils.RandomBoolean())
+                if (Utils.RandomBoolean(0.9f))
                 {
                     GameObject l = UnityEngine.Random.value > 0.9f && a > 1 - (float)fillPercent ?
-                        Instantiate(entities[UnityEngine.Random.Range(0, entities.Length)], new Vector3(x, h * 10f, y), Quaternion.Euler(-90, UnityEngine.Random.Range(0, 360), 0)) : null;
+                        Instantiate(entities[UnityEngine.Random.Range(0, entities.Length)], new Vector3(x, a * 5f, y), Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0)) : null;
                 }
 
             }

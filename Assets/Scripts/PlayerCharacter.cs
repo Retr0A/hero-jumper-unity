@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerCharacter : MonoBehaviour
 {
+    [Header("Camera Look / Movement")]
     public float walkingSpeed = 7.5f;
     public float runningSpeed = 11.5f;
     public float jumpSpeed = 8.0f;
@@ -19,6 +20,12 @@ public class PlayerCharacter : MonoBehaviour
 
     [HideInInspector]
     public bool canMove = true;
+
+    [Header("Player Stats")]
+    public int health = 100;
+
+    [Header("Terrain Editing")]
+    public LayerMask groundLayer;
 
     void Start()
     {
@@ -62,5 +69,40 @@ public class PlayerCharacter : MonoBehaviour
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
+
+        if (Input.GetMouseButton(0))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, Mathf.Infinity, groundLayer))
+            {
+                hit.transform.localScale += new Vector3(0, 0.2f, 0);
+            }
+        }
+        if (Input.GetMouseButton(1))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, Mathf.Infinity, groundLayer))
+            {
+                if (hit.transform.localScale.y >= 0.1f)
+                {
+                    hit.transform.localScale -= new Vector3(0, 0.2f, 0);
+                }
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+    }
+
+    /// <summary>
+    /// Removes health from the player
+    /// </summary>
+    /// <param name="healthToRemove">Health to remove from the player</param>
+    /// <returns>Current health</returns>
+    public int RemoveHealth(int healthToRemove)
+    {
+        health -= healthToRemove;
+        return health;
     }
 }
